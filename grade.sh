@@ -35,22 +35,32 @@ else
 fi
 
 cp TestListExamples.java grading-area
+cp -r ./lib grading-area
+cd grading-area
 
 set +e
 
-javac grading-area/ListExamples.java >grading-area/errors.txt 2>&1
+# javac grading-area/ListExamples.java >grading-area/errors1.txt 2>&1
+# if [[ $? -ne 0 ]]
+# then
+#   echo "Student File not compiled."
+#   exit 2
+# fi
+
+javac -cp ".;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar" ListExamples.java TestListExamples.java > errors1.txt 2>&1
 if [[ $? -ne 0 ]]
 then
   echo "Student File not compiled."
+  cat errors1.txt
   exit 2
 fi
 
-javac -cp ".;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar" grading-area/TestListExamples.java > grading-area/errors.txt 2>&1
+java -cp ".;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore TestListExamples > errors2.txt 2>&1
 if [[ $? -ne 0 ]]
 then
-  echo "Grading File not compiled."
+  echo "File has errors"
+  cat errors2.txt
   exit 2
 fi
-
 
 

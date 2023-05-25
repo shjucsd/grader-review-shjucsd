@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
+
 class IsMoon implements StringChecker {
   public boolean checkString(String s) {
     return s.equalsIgnoreCase("moon");
