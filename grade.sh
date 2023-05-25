@@ -47,7 +47,7 @@ set +e
 #   exit 2
 # fi
 
-javac -cp ".;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar" ListExamples.java TestListExamples.java > errors1.txt 2>&1
+javac -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar ListExamples.java TestListExamples.java > errors1.txt 2>&1
 if [[ $? -ne 0 ]]
 then
   echo "Student File not compiled."
@@ -55,7 +55,7 @@ then
   exit 2
 fi
 
-java -cp ".;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore TestListExamples > errors2.txt 2>&1
+java -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar org.junit.runner.JUnitCore TestListExamples > errors2.txt 2>&1
 if [[ $? -ne 0 ]]
 then
   echo "File has errors"
